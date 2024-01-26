@@ -33,17 +33,6 @@
     
     
     <entry>
-      <title>futher</title>
-      <link href="/categories/index.html"/>
-      <url>/categories/index.html</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>友情链接</title>
       <link href="/link/index.html"/>
       <url>/link/index.html</url>
@@ -58,6 +47,17 @@
       <title>zhixiong&#39;s page</title>
       <link href="/tags/index.html"/>
       <url>/tags/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>futher</title>
+      <link href="/categories/index.html"/>
+      <url>/categories/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
       
