@@ -64,5 +64,38 @@
     </entry>
     
     
+    
+    <entry>
+      <title></title>
+      <link href="/gallery/index.html"/>
+      <url>/gallery/index.html</url>
+      
+        <content type="html"><![CDATA[<div class="gallery-group-main">    <figure class="gallery-group">  <img class="gallery-group-img no-lightbox" src="/./images/7.jpg" alt="Group Image Gallery">  <figcaption>  <div class="gallery-group-name">我的大学</div>  <p>我的奋斗</p>  <a href="/gallery/college"></a>  </figcaption>  </figure>      <figure class="gallery-group">  <img class="gallery-group-img no-lightbox" src="/./images/6.jpg" alt="Group Image Gallery">  <figcaption>  <div class="gallery-group-name">Robocon</div>  <p>WUST ROBOCON 2023</p>  <a href="/gallery/robocon"></a>  </figcaption>  </figure>      <figure class="gallery-group">  <img class="gallery-group-img no-lightbox" src="/./images/8.jpg" alt="Group Image Gallery">  <figcaption>  <div class="gallery-group-name">起重机</div>  <p>命运的齿轮开始转动</p>  <a href="/gallery/college"></a>  </figcaption>  </figure>  </div>    ]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>gallery</title>
+      <link href="/gallery/robocon.html"/>
+      <url>/gallery/robocon.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>gallery</title>
+      <link href="/gallery/college.html"/>
+      <url>/gallery/college.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
   
 </search>
