@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Vscode&amp;Keil</title>
+      <link href="/2024/01/30/vscode-keil/"/>
+      <url>/2024/01/30/vscode-keil/</url>
+      
+        <content type="html"><![CDATA[<p>前言：之前一直用的keil软件开发stm32的工程，越来越觉得keil的界面模糊不好看，于是尝试转移到vscode平台，目前实现的功能是cubemx生成工程文件后可用vscode打开并编译烧录，如果有调试需求还是在keil上。使用Vscode搭配keil，更加优雅的进行开发</p><h1 id="1-安装MinGW"><a href="#1-安装MinGW" class="headerlink" title="1.安装MinGW"></a>1.安装MinGW</h1><p>把MinGW压缩包解压到常用的一个位置，</p><h2 id="添加环境变量"><a href="#添加环境变量" class="headerlink" title="添加环境变量"></a>添加环境变量</h2><p>右键此电脑-&gt;属性-&gt;高级系统设置-&gt;环境变量-&gt;新建-&gt;添加，将MinGW的bin文件夹路径复制到新建的环境变量中。</p><h1 id="2-安装Keil-Assistant插件"><a href="#2-安装Keil-Assistant插件" class="headerlink" title="2.安装Keil Assistant插件"></a>2.安装Keil Assistant插件</h1><p>安装后，右键点击扩展设置，将你的keil软件的UV4.exe的路径粘贴上去</p><p><img src="/2024/01/30/vscode-keil/image-20240130220057873.png" alt="image-20240130220057873"></p><p>然后如果安装成功的话，vscode左栏就会出现</p><p><img src="/2024/01/30/vscode-keil/image-20240130220235274.png" alt="image-20240130220235274"></p><p>依次为编译，烧录，重编译</p><h1 id="3-遇到的问题"><a href="#3-遇到的问题" class="headerlink" title="3.遇到的问题"></a>3.遇到的问题</h1><p>1.点击编译后出现</p><p>![I&#96;521CP%0I$IA_H59WFNJXA](.&#x2F;vscode-keil&#x2F;I%60521CP%250I$IA_H59WFNJXA.png)</p><p>然后发现是在添加路径到Keil Assistant时路径开头写错了</p><p>2.修复第一个问题后，再次编译，出现</p><p><img src="/2024/01/30/vscode-keil/%7BWEJS9SE%25J%7BMGCUP6EYHMG.png" alt="{WEJS9~SE%J{MGCUP6EYHMG"></p><p>解决：先打开settings.json文件</p><p><img src="/2024/01/30/vscode-keil/image-20240130221023430.png" alt="image-20240130221023430"></p><p>把代码中的[U+202A]删掉即可，到此可以正常编译和烧录</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Embedded </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Vscode&amp;Keil </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Robotics learning path</title>
       <link href="/2024/01/30/Robotics/"/>
       <url>/2024/01/30/Robotics/</url>
@@ -38,7 +63,7 @@
       
       <categories>
           
-          <category> embedded </category>
+          <category> Embedded </category>
           
       </categories>
       
@@ -88,7 +113,7 @@
       
       <categories>
           
-          <category> embedded </category>
+          <category> Embedded </category>
           
       </categories>
       
@@ -202,6 +227,28 @@
       <url>/gallery/college.html</url>
       
         <content type="html"><![CDATA[<div class="gallery-container" data-type="data" data-button>      <div class="gallery-data">[{"url":"./college/49-1706344694822-120.jpg","alt":"49"},{"url":"./college/48-1706344708682-122.jpg","alt":"48"},{"url":"./college/47-1706344716685-124.jpg","alt":"47"},{"url":"./college/46-1706344721866-126.jpg","alt":"46"},{"url":"./college/45-1706344637895-118.jpg","alt":"45"},{"url":"./college/39-1706345196130-209.jpg","alt":"39"},{"url":"./college/37-1706345211163-211.jpg","alt":"37"},{"url":"./college/33-1706345229054-213.jpg","alt":"33"},{"url":"./college/29-1706345235414-215.jpg","alt":"29"},{"url":"./college/19-1706345257443-217.jpg","alt":"19"},{"url":"./college/12-1706345274915-219.jpg","alt":"12"},{"url":"./college/13-1706345280346-221.jpg","alt":"13"},{"url":"./college/14-1706345293624-223.jpg","alt":"14"},{"url":"./college/31-1706345317371-225.jpg","alt":"31"},{"url":"./college/43-1706345325834-227.jpg","alt":"43"},{"url":"./college/41-1706345332395-229.jpg","alt":"41"},{"url":"./college/38-1706345344631-231.jpg","alt":"38"},{"url":"./college/30-1706345352332-233.jpg","alt":"30"},{"url":"./college/32-1706345365438-235.jpg","alt":"32"},{"url":"./college/50.jpg","alt":"50"},{"url":"./college/34-1706345374354-237.jpg","alt":"34"},{"url":"./college/51.jpg","alt":"51"},{"url":"./college/52.jpg","alt":"52"},{"url":"./college/35-1706345381156-239.jpg","alt":"35"},{"url":"./college/20-1706345398048-241.jpg","alt":"20"},{"url":"./college/25-1706345411044-243.jpg","alt":"25"},{"url":"./college/24-1706345419521-245.jpg","alt":"24"},{"url":"./college/23-1706345425445-247.jpg","alt":"23"},{"url":"./college/17-1706345438446-249.jpg","alt":"17"},{"url":"./college/9-1706345445647-251.jpg","alt":"9"},{"url":"./college/8-1706345461721-257.jpg","alt":"8"},{"url":"./college/26-1706345477181-259.jpg","alt":"26"},{"url":"./college/16-1706345482816-261.jpg","alt":"16"},{"url":"./college/7-1706345489413-263.jpg","alt":"7"},{"url":"./college/6-1706345496102-265.jpg","alt":"6"},{"url":"./college/4-1706345502454-267.jpg","alt":"4"},{"url":"./college/3-1706345507417-269.jpg","alt":"3"},{"url":"./college/2-1706345515116-271.jpg","alt":"2"},{"url":"./college/1-1706345519911-273.jpg","alt":"1"}]</div>      <div class="gallery-items">      </div>    </div>]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Vscode&amp;Keil</title>
+      <link href="/vscode-keil/index-1.html"/>
+      <url>/vscode-keil/index-1.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>vscode&amp;keil</title>
+      <link href="/vscode-keil/index.html"/>
+      <url>/vscode-keil/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
       
     </entry>
     
