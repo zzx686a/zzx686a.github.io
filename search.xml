@@ -63,7 +63,7 @@
       
       <categories>
           
-          <category> Embedded </category>
+          <category> embedded </category>
           
       </categories>
       
@@ -88,14 +88,14 @@
       
       <categories>
           
-          <category> Blog </category>
+          <category> blog </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> Blog </tag>
+            <tag> blog </tag>
             
         </tags>
       
@@ -113,7 +113,7 @@
       
       <categories>
           
-          <category> Embedded </category>
+          <category> embedded </category>
           
       </categories>
       
