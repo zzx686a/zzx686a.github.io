@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>数据结构</title>
+      <link href="/2024/02/02/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+      <url>/2024/02/02/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</url>
+      
+        <content type="html"><![CDATA[<h1 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h1>]]></content>
+      
+      
+      <categories>
+          
+          <category> 计算机科学 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数据结构 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Keil5</title>
       <link href="/2024/02/01/Keil5/"/>
       <url>/2024/02/01/Keil5/</url>
@@ -13,7 +38,7 @@
       
       <categories>
           
-          <category> Tools </category>
+          <category> 工具 </category>
           
       </categories>
       
@@ -38,7 +63,7 @@
       
       <categories>
           
-          <category> Tools </category>
+          <category> 工具 </category>
           
       </categories>
       
@@ -63,7 +88,7 @@
       
       <categories>
           
-          <category> Robotics </category>
+          <category> 机器人学 </category>
           
       </categories>
       
@@ -88,7 +113,7 @@
       
       <categories>
           
-          <category> embedded </category>
+          <category> 嵌入式 </category>
           
       </categories>
       
@@ -113,7 +138,7 @@
       
       <categories>
           
-          <category> blog </category>
+          <category> 博客搭建 </category>
           
       </categories>
       
@@ -138,7 +163,7 @@
       
       <categories>
           
-          <category> embedded </category>
+          <category> 嵌入式 </category>
           
       </categories>
       
