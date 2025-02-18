@@ -1,0 +1,385 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>电机控制 | Zhixiong's island</title><meta name="author" content="Zhixiong Zhang"><meta name="copyright" content="Zhixiong Zhang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="概念扫盲BLDC（Brushless DC Motor，无刷直流电机）、PMSM（Permanent Magnet Synchronous Motor，永磁同步电机）和FOC（Field-Oriented Control，磁场定向控制。BLDC和PMSM是两种不同的电机，它们的相同点都是无刷的，不同点在于反电动势电压的形状，BLDC通常用方波电流驱动，PMSM通常采用正弦波电流驱动，FOC作为一种">
+<meta property="og:type" content="article">
+<meta property="og:title" content="电机控制">
+<meta property="og:url" content="http://zzx686a.github.io/2025/01/24/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6/index.html">
+<meta property="og:site_name" content="Zhixiong&#39;s island">
+<meta property="og:description" content="概念扫盲BLDC（Brushless DC Motor，无刷直流电机）、PMSM（Permanent Magnet Synchronous Motor，永磁同步电机）和FOC（Field-Oriented Control，磁场定向控制。BLDC和PMSM是两种不同的电机，它们的相同点都是无刷的，不同点在于反电动势电压的形状，BLDC通常用方波电流驱动，PMSM通常采用正弦波电流驱动，FOC作为一种">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg">
+<meta property="article:published_time" content="2025-01-23T16:23:25.000Z">
+<meta property="article:modified_time" content="2025-02-18T12:24:29.698Z">
+<meta property="article:author" content="Zhixiong Zhang">
+<meta property="article:tag" content="电机控制">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg"><link rel="shortcut icon" href="/images/bear.png"><link rel="canonical" href="http://zzx686a.github.io/2025/01/24/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.12.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":50},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '电机控制',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-02-18 20:24:29'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/xxx.css"><meta name="generator" content="Hexo 6.3.0"></head><body><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+document.addEventListener('pjax:send', () => {
+  Pace.restart()
+})
+</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.min.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/./images/head.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> menu</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> list</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> link</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> about</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/gallery"><i class="fa-fw fa-solid fa-image"></i><span> Picture</span></a></div><div class="menus_item"><a class="site-page" href="/message"><i class="fa-fw fa-solid fa-message"></i><span> Message</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Zhixiong's island"><span class="site-name">Zhixiong's island</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> menu</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> list</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> link</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> about</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/gallery"><i class="fa-fw fa-solid fa-image"></i><span> Picture</span></a></div><div class="menus_item"><a class="site-page" href="/message"><i class="fa-fw fa-solid fa-message"></i><span> Message</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">电机控制</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-01-23T16:23:25.000Z" title="发表于 2025-01-24 00:23:25">2025-01-24</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-02-18T12:24:29.698Z" title="更新于 2025-02-18 20:24:29">2025-02-18</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>3分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="电机控制"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="概念扫盲"><a href="#概念扫盲" class="headerlink" title="概念扫盲"></a>概念扫盲</h1><p>BLDC（Brushless DC Motor，无刷直流电机）、PMSM（Permanent Magnet Synchronous Motor，永磁同步电机）和FOC（Field-Oriented Control，磁场定向控制。BLDC和PMSM是两种不同的电机，它们的相同点都是无刷的，不同点在于反电动势电压的形状，BLDC通常用方波电流驱动，PMSM通常采用正弦波电流驱动，FOC作为一种控制方法，可用于驱动BLDC和PMSM。</p>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>BLDC</th>
+<th>PMSM</th>
+<th>FOC（控制策略）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>电机类型</strong></td>
+<td>无刷直流电机</td>
+<td>永磁同步电机</td>
+<td>控制策略（适用于BLDC和PMSM）</td>
+</tr>
+<tr>
+<td><strong>驱动方式</strong></td>
+<td>方波驱动</td>
+<td>正弦波驱动</td>
+<td>磁场定向控制</td>
+</tr>
+<tr>
+<td><strong>控制精度</strong></td>
+<td>较低</td>
+<td>较高</td>
+<td>高</td>
+</tr>
+<tr>
+<td><strong>转矩波动</strong></td>
+<td>较大</td>
+<td>较小</td>
+<td>极小</td>
+</tr>
+<tr>
+<td><strong>应用场景</strong></td>
+<td>低成本、高速应用</td>
+<td>高性能、高精度应用</td>
+<td>高性能、高精度控制</td>
+</tr>
+</tbody></table>
+<h1 id="BLDC"><a href="#BLDC" class="headerlink" title="BLDC"></a>BLDC</h1><img src="/2025/01/24/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6/image-20250124121336052.png" alt="image-20250124121336052" style="zoom:50%;">
+
+<h2 id="有刷VS无刷"><a href="#有刷VS无刷" class="headerlink" title="有刷VS无刷"></a>有刷VS无刷</h2><p>对于有刷电机的驱动方式，通过使直流电通过线圈绕组，得到一个具有磁极的电磁铁，磁极随后与永磁体的磁极相互作用，使转子旋转</p>
+<p><img src="/2025/01/24/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6/image-20250124003923690.png" alt="image-20250124003923690"></p>
+<p>在转子每旋转半圈后</p>
+<p><img src="/2025/01/24/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6/image-20250124004101659.png" alt="image-20250124004101659"></p>
+<p>要使转子一直旋转，我们需要翻转电磁铁的磁极，通过切换线圈绕组中电流的极性实现，这种相位转换成为换向</p>
+<p><img src="/2025/01/24/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6/image-20250124004019961.png" alt="image-20250124004019961"></p>
+<p>在有刷电机中，换向发生在电机旋转时电刷与转子换向器接触的机械位置，由于这种接触，电刷会随着时间的推移而发生磨损，进而影响电机的性能</p>
+<img src="/2025/01/24/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6/image-20250124004757347.png" alt="image-20250124004757347" style="zoom:70%;">
+
+<p>BLDC通过用<strong>电子换向代替机械换向</strong>克服有刷电机的缺点</p>
+<p>​                               <img src="/2025/01/24/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6/image-20250124005503307.png" alt="image-20250124005503307"></p>
+<p>可以把BLDC看作是倒装的有刷电机，因为永磁体变为转子，线圈绕组变为了定子</p>
+<p><img src="/2025/01/24/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6/image-20250124094906195.png" alt="image-20250124094906195"></p>
+<p>对于BLDC和PMSM，其不同在于<strong>反电动势</strong>电压的形状，电机被旋转时起到发电机的作用，意味着在定子中感应到反电动势电压，该电压与电机的驱动电压相反，反电动势是电机的一个重要特征，通过观察其形状我们知道电机的类型，决定我们使用什么类型的控制算法来控制电机（可以将一相接到电压表，然后用手旋转转子，相当于发电机，电压表波形即该电机的反电动势）</p>
+<p><img src="/2025/01/24/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6/image-20250124094850055.png" alt="image-20250124094850055"></p>
+<h2 id="内部工作原理"><a href="#内部工作原理" class="headerlink" title="内部工作原理"></a>内部工作原理</h2><p>在A和C相之间施加电压，沿着虚线产生一个组合磁场</p>
+<img src="/2025/01/24/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6/image-20250124101354503.png" alt="image-20250124101354503" style="zoom:50%;">
+
+<p>转子的角度是相对水平轴测量的，有六种不同的转子对齐方式，每种方式彼此间隔60°，如果我们能够每隔60°对相位进行正确的换向，就可以使电机旋转起来，这称为<strong>六步换向&#x2F;梯形控制</strong></p>
+<img src="/2025/01/24/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6/image-20250124103000461.png" alt="image-20250124103000461" style="zoom:80%;">
+
+<p>随着极对的增加换向会更频繁的发生，为了适时以正确的相位进行正确的换向，我们需要知道转子的位置，通常使用<strong>霍尔传感器</strong>来测量转子位置</p>
+<img src="/2025/01/24/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6/image-20250124103731170.png" alt="image-20250124103731170" style="zoom:50%;">
+
+
+
+<p>​                                                                       <img src="/2025/01/24/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6/image-20250124104036546.png" alt="image-20250124104036546" style="zoom:31%;"><img src="/2025/01/24/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6/image-20250124104053450.png" alt="image-20250124104053450" style="zoom:30%;"></p>
+<p>完成60°旋转后，就会发生下一步换向</p>
+<p>​                                                                    <img src="/2025/01/24/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6/image-20250124104532717.png" alt="image-20250124104532717" style="zoom:33%;"><img src="/2025/01/24/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6/image-20250124104556021.png" alt="image-20250124104556021" style="zoom:33%;"></p>
+<p>换向的发生方式是：<strong>转子永远不与定子磁场对齐，而是始终追逐它</strong>。 因为当转子和定子磁场完全对准时时，电机产生零扭矩，因此我们永远不会让它们对准，其次当磁场互成90°角时，会产生最大扭矩，在BLDC中，<strong>六步换向从未到达90°</strong>，且角度在一定范围内波动，造成这种情况的原因是梯形控制本身的特性，磁场定向控制等更先进的技术通常用于控制PMSM，可通过在定子磁场和转子磁场之间达到90°来产生更大的扭矩</p>
+<p>为了控制六步换向的相位，使用<strong>三相逆变器</strong>将直流电源转换为三相电流，三相逆变器会转换恒定电压，以使电机保持恒定速度，要以不同的速度控制电机，必须调节施加的电压，一种方法是<strong>PWM</strong></p>
+<p><img src="/2025/01/24/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6/image-20250124105751476.png" alt="image-20250124105751476"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://zzx686a.github.io">Zhixiong Zhang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://zzx686a.github.io/2025/01/24/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6/">http://zzx686a.github.io/2025/01/24/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://zzx686a.github.io" target="_blank">Zhixiong's island</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6/">电机控制</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>赞助</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/images/wechat.jpg" target="_blank"><img class="post-qr-code-img" src="/images/wechat.jpg" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/images/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/images/alipay.jpg" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2025/02/15/%E5%B9%B6%E8%81%94%E5%9B%9B%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA/" title="并联四足机器人"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">并联四足机器人</div></div></a></div><div class="next-post pull-right"><a href="/2025/01/18/PCB%E8%AE%BE%E8%AE%A1-51/" title="PCB设计_51"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">PCB设计_51</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div class="comment-switch"><span class="first-comment">Valine</span><span id="switch-btn"></span><span class="second-comment">Disqus</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div><div><div id="disqus_thread"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/./images/head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Zhixiong Zhang</div><div class="author-info__description">Fortune favors the bold</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://space.bilibili.com/633279373?spm_id_from=333.1007.0.0"><i class="fa-brands fa-bilibili"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://tool.gljlw.com/qq/?qq=3457109829" target="_blank" title="QQ"><i class="fa-brands fa-qq" style="color: #4a7dbe;"></i></a><a class="social-icon" href="https://mbd.pub/o/author-bmyalmln" target="_blank" title="store"><i class="fa-solid fa-store" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">wechat zzxshangan2024</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5%E6%89%AB%E7%9B%B2"><span class="toc-number">1.</span> <span class="toc-text">概念扫盲</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#BLDC"><span class="toc-number">2.</span> <span class="toc-text">BLDC</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%89%E5%88%B7VS%E6%97%A0%E5%88%B7"><span class="toc-number">2.1.</span> <span class="toc-text">有刷VS无刷</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E9%83%A8%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">2.2.</span> <span class="toc-text">内部工作原理</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/02/15/%E5%B9%B6%E8%81%94%E5%9B%9B%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA/" title="并联四足机器人"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="并联四足机器人"/></a><div class="content"><a class="title" href="/2025/02/15/%E5%B9%B6%E8%81%94%E5%9B%9B%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA/" title="并联四足机器人">并联四足机器人</a><time datetime="2025-02-15T13:33:48.000Z" title="发表于 2025-02-15 21:33:48">2025-02-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/01/24/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6/" title="电机控制"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="电机控制"/></a><div class="content"><a class="title" href="/2025/01/24/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6/" title="电机控制">电机控制</a><time datetime="2025-01-23T16:23:25.000Z" title="发表于 2025-01-24 00:23:25">2025-01-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/01/18/PCB%E8%AE%BE%E8%AE%A1-51/" title="PCB设计_51"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="PCB设计_51"/></a><div class="content"><a class="title" href="/2025/01/18/PCB%E8%AE%BE%E8%AE%A1-51/" title="PCB设计_51">PCB设计_51</a><time datetime="2025-01-18T15:08:42.000Z" title="发表于 2025-01-18 23:08:42">2025-01-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/01/14/KEIL%E4%BD%BF%E7%94%A8/" title="51单片机学习笔记"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="51单片机学习笔记"/></a><div class="content"><a class="title" href="/2025/01/14/KEIL%E4%BD%BF%E7%94%A8/" title="51单片机学习笔记">51单片机学习笔记</a><time datetime="2025-01-14T15:13:43.099Z" title="发表于 2025-01-14 23:13:43">2025-01-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/19/Webots-python/" title="Webots&amp;python"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Webots&amp;python"/></a><div class="content"><a class="title" href="/2024/02/19/Webots-python/" title="Webots&amp;python">Webots&amp;python</a><time datetime="2024-02-19T14:38:45.000Z" title="发表于 2024-02-19 22:38:45">2024-02-19</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By Zhixiong Zhang</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.12.0"></script><script src="/js/main.js?v=4.12.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>(() => {
+  const initValine = () => {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'ereDBpr82BMDhIAqKQA37n4j-gzGzoHsz',
+      appKey: 'eyRRFW9XAfz5jAjj7liOHcFH',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: true
+    }, null))
+  }
+
+  const loadValine = async () => {
+    if (typeof Valine === 'function') initValine()
+    else {
+      await getScript('https://cdn.jsdelivr.net/npm/valine@1.5.1/dist/Valine.min.js')
+      initValine()
+    }
+  }
+
+  if ('Valine' === 'Valine' || !true) {
+    if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+    else setTimeout(loadValine, 0)
+  } else {
+    window.loadOtherComment = loadValine
+  }
+})()</script><script>(() => {
+  const disqus_config = function () {
+    this.page.url = 'http://zzx686a.github.io/2025/01/24/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6/'
+    this.page.identifier = '/2025/01/24/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6/'
+    this.page.title = '电机控制'
+  }
+
+  const disqusReset = () => {
+    window.DISQUS && window.DISQUS.reset({
+      reload: true,
+      config: disqus_config
+    })
+  }
+
+  btf.addGlobalFn('themeChange', disqusReset, 'disqus')
+
+  const loadDisqus = () =>{
+    if (window.DISQUS) disqusReset()
+    else {
+      const script = document.createElement('script')
+      script.src = 'https://.disqus.com/embed.js'
+      script.setAttribute('data-timestamp', +new Date())
+      document.head.appendChild(script)
+    }
+  }
+
+  const getCount = async() => {
+    try {
+      const eleGroup = document.querySelector('#post-meta .disqus-comment-count')
+      if (!eleGroup) return
+      const cleanedLinks = eleGroup.href.replace(/#post-comment$/, '')
+
+      const res = await fetch(`https://disqus.com/api/3.0/threads/set.json?forum=&api_key=&thread:link=${cleanedLinks}`,{
+        method: 'GET'
+      })
+      const result = await res.json()
+
+      const count = result.response.length ? result.response[0].posts : 0
+      eleGroup.textContent = count
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+  if ('Valine' === 'Disqus' || !true) {
+    if (true) btf.loadComment(document.getElementById('disqus_thread'), loadDisqus)
+    else {
+      loadDisqus()
+      GLOBAL_CONFIG_SITE.isPost && getCount()
+    }
+  } else {
+    window.loadOtherComment = loadDisqus
+  }
+})()</script></div><div class="aplayer no-destroy" data-id="7351616036" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay="true"> </div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-fluttering-ribbon.min.js"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/click-heart.min.js" async="async" mobile="false"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener
+  btf.removeGlobalFnEvent('pjax')
+  btf.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

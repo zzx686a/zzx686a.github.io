@@ -1,0 +1,506 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>并联四足机器人 | Zhixiong's island</title><meta name="author" content="Zhixiong Zhang"><meta name="copyright" content="Zhixiong Zhang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="并联四足机器人位置控制  参考： 【【教程】成本1K！从0教你DIY无刷四足机器人~灯哥无刷四足一代实验版开源啦！！！】 https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV1kV411i76z&#x2F;?share_source&#x3D;copy_web&amp;vd_source&#x3D;4eaa4760820b4cda603e510d556578ac 【灯哥0基础DIY四足机器人指南（8）–用Matl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="并联四足机器人">
+<meta property="og:url" content="http://zzx686a.github.io/2025/02/15/%E5%B9%B6%E8%81%94%E5%9B%9B%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA/index.html">
+<meta property="og:site_name" content="Zhixiong&#39;s island">
+<meta property="og:description" content="并联四足机器人位置控制  参考： 【【教程】成本1K！从0教你DIY无刷四足机器人~灯哥无刷四足一代实验版开源啦！！！】 https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV1kV411i76z&#x2F;?share_source&#x3D;copy_web&amp;vd_source&#x3D;4eaa4760820b4cda603e510d556578ac 【灯哥0基础DIY四足机器人指南（8）–用Matl">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg">
+<meta property="article:published_time" content="2025-02-15T13:33:48.000Z">
+<meta property="article:modified_time" content="2025-02-18T12:23:47.542Z">
+<meta property="article:author" content="Zhixiong Zhang">
+<meta property="article:tag" content="四足机器人">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg"><link rel="shortcut icon" href="/images/bear.png"><link rel="canonical" href="http://zzx686a.github.io/2025/02/15/%E5%B9%B6%E8%81%94%E5%9B%9B%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.12.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":50},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '并联四足机器人',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-02-18 20:23:47'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/xxx.css"><meta name="generator" content="Hexo 6.3.0"></head><body><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+document.addEventListener('pjax:send', () => {
+  Pace.restart()
+})
+</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.min.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/./images/head.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> menu</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> list</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> link</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> about</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/gallery"><i class="fa-fw fa-solid fa-image"></i><span> Picture</span></a></div><div class="menus_item"><a class="site-page" href="/message"><i class="fa-fw fa-solid fa-message"></i><span> Message</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Zhixiong's island"><span class="site-name">Zhixiong's island</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> menu</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> list</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> link</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> about</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/gallery"><i class="fa-fw fa-solid fa-image"></i><span> Picture</span></a></div><div class="menus_item"><a class="site-page" href="/message"><i class="fa-fw fa-solid fa-message"></i><span> Message</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">并联四足机器人</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-02-15T13:33:48.000Z" title="发表于 2025-02-15 21:33:48">2025-02-15</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-02-18T12:23:47.542Z" title="更新于 2025-02-18 20:23:47">2025-02-18</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">4.5k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>18分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="并联四足机器人"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="并联四足机器人位置控制"><a href="#并联四足机器人位置控制" class="headerlink" title="并联四足机器人位置控制"></a>并联四足机器人位置控制</h1><img src="/2025/02/15/%E5%B9%B6%E8%81%94%E5%9B%9B%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA/2.jpg" alt="2" style="zoom:70%;">
+
+<p>参考：</p>
+<p>【【教程】成本1K！从0教你DIY无刷四足机器人~灯哥无刷四足一代实验版开源啦！！！】 <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1kV411i76z/?share_source=copy_web&vd_source=4eaa4760820b4cda603e510d556578ac">https://www.bilibili.com/video/BV1kV411i76z/?share_source=copy_web&amp;vd_source=4eaa4760820b4cda603e510d556578ac</a></p>
+<p>【灯哥0基础DIY四足机器人指南（8）–用Matlab画出摆线步态曲线】 <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1KQ4y1K7aV/?share_source=copy_web&vd_source=4eaa4760820b4cda603e510d556578ac">https://www.bilibili.com/video/BV1KQ4y1K7aV/?share_source=copy_web&amp;vd_source=4eaa4760820b4cda603e510d556578ac</a></p>
+<p>华北舵狗王带你一起做四足机器人2（Moco-8四足机器人控制算法简介） - 华北舵狗王的文章 - 知乎<br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/69869440">https://zhuanlan.zhihu.com/p/69869440</a></p>
+<p>【灯哥0基础DIY四足机器人指南（9）–手把手教你写出小跑步态程序】                                                                                                                                                   <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1YD4y1D7k6/?share_source=copy_web&vd_source=4eaa4760820b4cda603e510d556578ac">https://www.bilibili.com/video/BV1YD4y1D7k6/?share_source=copy_web&amp;vd_source=4eaa4760820b4cda603e510d556578ac</a></p>
+<p>[灯哥开源—四足机器人]程序算法讲解与STM32移植——PA_TROT和PA_WALK讲解和trot步态，walk步态，步态规划-CSDN                                                           <a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_41659552/article/details/113738017?fromshare=blogdetail&sharetype=blogdetail&sharerId=113738017&sharerefer=PC&sharesource=qq_52769953&sharefrom=from_link">https://blog.csdn.net/weixin_41659552/article/details/113738017?fromshare=blogdetail&amp;sharetype=blogdetail&amp;sharerId=113738017&amp;sharerefer=PC&amp;sharesource=qq_52769953&amp;sharefrom=from_link</a></p>
+<p>【干货|开源MIT Min cheetah机械狗设计(五)】|机械狗步态规划（重点） - 陈不陈的文章 - 知乎<br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/639128926">https://zhuanlan.zhihu.com/p/639128926</a></p>
+<p>MIT Cheetah 完整开源代码与论文简介 - 廖洽源的文章 - 知乎<br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/79391139?utm_psn=1874912895365672960">https://zhuanlan.zhihu.com/p/79391139?utm_psn=1874912895365672960</a></p>
+<p>四足机器人优化方法初探：快速移植MIT Cheetha MPC控制代码 - 华北舵狗王的文章 - 知乎                                                                                                               <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/450008168?utm_psn=1874923719606009856">https://zhuanlan.zhihu.com/p/450008168?utm_psn=1874923719606009856</a></p>
+<h2 id="摆线足端轨迹和运动学逆解"><a href="#摆线足端轨迹和运动学逆解" class="headerlink" title="摆线足端轨迹和运动学逆解"></a>摆线足端轨迹和运动学逆解</h2><p>关于摆动腿足端的轨迹，有以下期望：</p>
+<p>1)在足端刚开始离地和将要触地时，希望足端的速度很小，并且在xy平面没有滑动趋势。</p>
+<p>2)足端在轨迹的中段时运动迅速。</p>
+<p>3)足端轨迹足够平滑，不存在波动。</p>
+<p>​	常用的足端估计有多项式曲线，分段直线和摆线。其中多项式曲线可以画出光滑且复杂的轨迹，但其中各个参数的计算比较复杂。分段直线轨迹虽然设计比较简单，但是轨迹不够光顺平滑。摆线轨迹虽然不能灵活的修改轨迹的形状，但是表达式简单且参数具有明显的几何意义，比较容易推导。</p>
+<p>​	摆线(Cycloid)，又称旋轮线、圆滚线，在数学中，摆线被定义为，一个圆沿一条直线运动时，圆边界上一定点所形成的轨迹。对于四足机器人，让四条腿以一定的相位差跑出这条曲线，四足机器人就有了前进的能力。</p>
+<h3 id="用Matlab画出摆线步态曲线"><a href="#用Matlab画出摆线步态曲线" class="headerlink" title="用Matlab画出摆线步态曲线"></a>用Matlab画出摆线步态曲线</h3><h4 id="摆线方程"><a href="#摆线方程" class="headerlink" title="摆线方程"></a>摆线方程</h4><p><img src="/2025/02/15/%E5%B9%B6%E8%81%94%E5%9B%9B%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA/85ff4051c97592072b46432c89e1ea28.png" alt="85ff4051c97592072b46432c89e1ea28"></p>
+<p>原始方程</p>
+<p><img src="/2025/02/15/%E5%B9%B6%E8%81%94%E5%9B%9B%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA/7d86ae714c34334350057032c9d9e3de.png" alt="7d86ae714c34334350057032c9d9e3de"></p>
+<p>推导</p>
+<img src="/2025/02/15/%E5%B9%B6%E8%81%94%E5%9B%9B%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA/image-20250216095006059.png" alt="image-20250216095006059" style="zoom:67%;">
+
+<p>对原始方程处理</p>
+<p><img src="/2025/02/15/%E5%B9%B6%E8%81%94%E5%9B%9B%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA/image-20250215233919049.png" alt="image-20250215233919049"></p>
+<p>Xs:水平方向足端当前起点位置 Xf:水平方向足端期望落足点位置   (xf-xs)&#x2F;2pi&#x3D;a </p>
+<p>Zs:竖直方向足端当前起点位置 Zf:水平方向足端期望落足点位置</p>
+<p>Ts:步态周期，λ：支撑相占空比, h:摆线高度 h&#x3D;2a&#x3D;(xf-xs)&#x2F;pi</p>
+<p>t:离散时刻点，每个点对应摆线轨迹上的一个坐标</p>
+<p>θ&#x3D;2pi*(t&#x2F;λTs) </p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">clc;</span><br><span class="line">clear;</span><br><span class="line">Ts=<span class="number">1</span>;    <span class="comment">%周期</span></span><br><span class="line">fai=<span class="number">0.5</span>; <span class="comment">%支撑相占空比</span></span><br><span class="line">xs=<span class="number">-20</span>;  <span class="comment">%起点x位置</span></span><br><span class="line">xf=<span class="number">20</span>;   <span class="comment">%终点x位置</span></span><br><span class="line">zs=<span class="number">0</span>;    <span class="comment">%z起点位置</span></span><br><span class="line">h=<span class="number">30</span>;    <span class="comment">%抬腿高度 h=2a=(xf-xs)/pi</span></span><br><span class="line"></span><br><span class="line">x=[];    <span class="comment">%设定数组用于保存x坐标值</span></span><br><span class="line">z=[];    <span class="comment">%设定数组用于保存z坐标值</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> t=<span class="number">0</span>:<span class="number">0.01</span>:Ts*(<span class="number">1</span>-fai)         <span class="comment">%for循环，从0开始到0.5,间隔0.01循环赋值给t,制造出时刻数值</span></span><br><span class="line">    sigma=<span class="number">2</span>*<span class="built_in">pi</span>*t/((<span class="number">1</span>-fai)*Ts);  <span class="comment">%计算sigma值</span></span><br><span class="line">    xep=(xf-xs)*((sigma-<span class="built_in">sin</span>(sigma))/(<span class="number">2</span>*<span class="built_in">pi</span>))+xs; <span class="comment">%根据时刻计算x轴离散点</span></span><br><span class="line">    zep=h*(<span class="number">1</span>-<span class="built_in">cos</span>(sigma))/<span class="number">2</span>+zs;                  <span class="comment">%根据时刻计算z轴离散点</span></span><br><span class="line">    x=[x,xep];                                  <span class="comment">%放在x数组里，准备画图</span></span><br><span class="line">    z=[z,zep];                                  <span class="comment">%放在z数组里，准备画图</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="built_in">plot</span>(x,z)                                       <span class="comment">%指定两个数组，分别画图</span></span><br><span class="line">axis equal                                      <span class="comment">%x,y轴刻度等比例</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/02/15/%E5%B9%B6%E8%81%94%E5%9B%9B%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA/image-20250216104415504.png" alt="image-20250216104415504"></p>
+<p>在Webots实现<strong>单条腿</strong>按摆线足端轨迹运动，占空比取0.5:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//通过足端轨迹得到足端离散的x_1,y_1坐标点，然后将它们运动学逆解即可得到关节电机相对应转的角度</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">trot</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (t &lt; T_s * fai)<span class="comment">//支撑相</span></span><br><span class="line">    &#123;</span><br><span class="line">        sigma = <span class="number">2</span> * pi * t / (fai * T_s);</span><br><span class="line">        zep = h * (<span class="number">1</span> - <span class="built_in">cos</span>(sigma)) / <span class="number">2</span>;                             <span class="comment">// t时刻足端在摆线坐标系里的高度</span></span><br><span class="line">        xep_b = (xf - xs) * ((sigma - <span class="built_in">sin</span>(sigma)) / (<span class="number">2</span> * pi)) + xs; <span class="comment">// 摆动相x坐标</span></span><br><span class="line">        xep_z = (xs - xf) * ((sigma - <span class="built_in">sin</span>(sigma)) / (<span class="number">2</span> * pi)) + xf; <span class="comment">// 支撑相x坐标</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 输出x</span></span><br><span class="line">        x_1 = xep_z; </span><br><span class="line">        <span class="comment">// 输出y</span></span><br><span class="line">        y_1 =<span class="number">0</span>+height;<span class="comment">//height为支撑相时期望的关节电机的离地高度（关节电机为坐标系原点），+0是因为此时足端在支撑相，触地。</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> ((t &gt; T_s * fai) &amp;&amp; (t &lt;= T_s))<span class="comment">//摆动相</span></span><br><span class="line">    &#123;</span><br><span class="line">        sigma = <span class="number">2</span> * pi * (t-fai*T_s) / (fai * T_s);</span><br><span class="line">        zep = h * (<span class="number">1</span> - <span class="built_in">cos</span>(sigma)) / <span class="number">2</span>; </span><br><span class="line">        xep_b = (xf - xs) * ((sigma - <span class="built_in">sin</span>(sigma)) / (<span class="number">2</span> * pi)) + xs; <span class="comment">// 摆动相x坐标</span></span><br><span class="line">        xep_z = (xs - xf) * ((sigma - <span class="built_in">sin</span>(sigma)) / (<span class="number">2</span> * pi)) + xf; <span class="comment">// 支撑相x坐标</span></span><br><span class="line"></span><br><span class="line">         <span class="comment">// 输出x</span></span><br><span class="line">        x_1 = xep_b; </span><br><span class="line">        <span class="comment">// 输出y</span></span><br><span class="line">        y_1 = zep+height; <span class="comment">//+zep是在摆动相足端抬起后该时刻足端距离关节电机的距离</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>不同height的作用效果如下，可见height就是关节的离地高度，height的绝度值越大，关节离地越远</p>
+<p>​                               <img src="/2025/02/15/%E5%B9%B6%E8%81%94%E5%9B%9B%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA/image-20250217102307359.png" alt="image-20250217102307359" style="zoom:70%;"><img src="/2025/02/15/%E5%B9%B6%E8%81%94%E5%9B%9B%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA/image-20250217102406286.png" alt="image-20250217102406286" style="zoom:66%;"><img src="/2025/02/15/%E5%B9%B6%E8%81%94%E5%9B%9B%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA/image-20250217102532540.png" alt="image-20250217102532540" style="zoom:57%;"></p>
+<h3 id="运动学逆解"><a href="#运动学逆解" class="headerlink" title="运动学逆解"></a>运动学逆解</h3><p>通过足端轨迹生成足端的x,y坐标，然后运动学逆解得到两个关节电机对应旋转的角度即可控制足端实现预定轨迹。</p>
+<img src="/2025/02/15/%E5%B9%B6%E8%81%94%E5%9B%9B%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA/image-20250215223609895.png" alt="image-20250215223609895" style="zoom:80%;">
+
+<img src="/2025/02/15/%E5%B9%B6%E8%81%94%E5%9B%9B%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA/image-20250215223832155.png" alt="image-20250215223832155" style="zoom:72%;">
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//输入足端坐标x_1,y_1，输出关节电机角度thet_rad1,thet_rad2</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">nijie</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//asin acos返回角度为弧度制</span></span><br><span class="line">    l = <span class="built_in">sqrt</span>(x_1 * x_1 + y_1 * y_1);</span><br><span class="line">    psi = <span class="built_in">asin</span>(x_1 / l);</span><br><span class="line">    phi = <span class="built_in">acos</span>((l * l + l_1 * l_1 - l_2 * l_2) / (<span class="number">2</span> * l * l_1));</span><br><span class="line">    thet_rad1 = phi - psi;</span><br><span class="line">    thet_rad2 = phi + psi;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="单腿摆线足端轨迹代码实现"><a href="#单腿摆线足端轨迹代码实现" class="headerlink" title="单腿摆线足端轨迹代码实现"></a>单腿摆线足端轨迹代码实现</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;webots/robot.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;webots/motor.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;math.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> TIME_STEP 64</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> pi 3.14</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> timestep;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> T_s = <span class="number">1</span>;<span class="comment">//周期</span></span><br><span class="line"><span class="type">float</span> fai = <span class="number">0.5</span>;<span class="comment">//支撑相占空比</span></span><br><span class="line"><span class="type">float</span> t=<span class="number">0.0</span>;<span class="comment">//离散时刻 每个t对应一个足端坐标点 通过调节每个循环中加的speed的大小可以改变步频</span></span><br><span class="line"><span class="type">float</span> speed=<span class="number">0.01</span>;<span class="comment">//步频调节</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*摆线足端轨迹参数*/</span></span><br><span class="line"><span class="type">float</span> xs=<span class="number">-40</span>;<span class="comment">//摆动相起点坐标</span></span><br><span class="line"><span class="type">float</span> xf=<span class="number">40</span>;<span class="comment">//摆动相终点坐标</span></span><br><span class="line"></span><br><span class="line"><span class="type">float</span> height=<span class="number">-75</span>;<span class="comment">//支撑相关节电机期望离地高度 关节电机为坐标原点，故为负</span></span><br><span class="line"><span class="type">float</span> h=<span class="number">30</span>;<span class="comment">//摆线顶点高度，需满足h=2a=(xf-xs)/pi，不是任意赋值，否则不是摆线</span></span><br><span class="line"><span class="type">float</span> zep = <span class="number">0.0</span>;   <span class="comment">// 摆线顶部高度h</span></span><br><span class="line"><span class="type">float</span> xep_b = <span class="number">0.0</span>; <span class="comment">// 摆动相x坐标</span></span><br><span class="line"><span class="type">float</span> xep_z = <span class="number">0.0</span>; <span class="comment">// 支撑相x坐标</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//足端输出坐标，用于运动学逆解</span></span><br><span class="line"><span class="type">float</span> x_1, x_2, x_3, x_4; </span><br><span class="line"><span class="type">float</span> y_1, y_2, y_3, y_4;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*运动学逆解参数*/</span></span><br><span class="line"><span class="type">float</span> sigma=<span class="number">0.0</span>;</span><br><span class="line"><span class="type">float</span> psi = <span class="number">0.0</span>;</span><br><span class="line"><span class="type">float</span> phi = <span class="number">0.0</span>;</span><br><span class="line"><span class="type">float</span> thet_rad1 = <span class="number">0.0</span>;</span><br><span class="line"><span class="type">float</span> thet_rad2 = <span class="number">0.0</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">float</span> l = <span class="number">0.0</span>;    <span class="comment">// 虚拟腿长</span></span><br><span class="line"><span class="type">float</span> l_1 = <span class="number">40.0</span>; <span class="comment">// 大腿长</span></span><br><span class="line"><span class="type">float</span> l_2 = <span class="number">80.0</span>; <span class="comment">// 小腿长</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">trot</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (t &lt; T_s * fai)<span class="comment">//支撑相</span></span><br><span class="line">    &#123;</span><br><span class="line">        sigma = <span class="number">2</span> * pi * t / (fai * T_s);</span><br><span class="line">        zep = h * (<span class="number">1</span> - <span class="built_in">cos</span>(sigma)) / <span class="number">2</span>;                             <span class="comment">// t时刻足端在摆线坐标系里的高度</span></span><br><span class="line">        xep_b = (xf - xs) * ((sigma - <span class="built_in">sin</span>(sigma)) / (<span class="number">2</span> * pi)) + xs; <span class="comment">// 摆动相x坐标</span></span><br><span class="line">        xep_z = (xs - xf) * ((sigma - <span class="built_in">sin</span>(sigma)) / (<span class="number">2</span> * pi)) + xf; <span class="comment">// 支撑相x坐标</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 输出x</span></span><br><span class="line">        x_1 = xep_z; </span><br><span class="line">        <span class="comment">// 输出y</span></span><br><span class="line">        y_1 =<span class="number">0</span>+height;<span class="comment">//height为支撑相时期望的关节电机的离地高度（关节电机为坐标系原点），+0是因为此时足端在支撑相，触地。</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> ((t &gt; T_s * fai) &amp;&amp; (t &lt;= T_s))<span class="comment">//摆动相</span></span><br><span class="line">    &#123;</span><br><span class="line">        sigma = <span class="number">2</span> * pi * (t-fai*T_s) / (fai * T_s);</span><br><span class="line">        zep = h * (<span class="number">1</span> - <span class="built_in">cos</span>(sigma)) / <span class="number">2</span>; </span><br><span class="line">        xep_b = (xf - xs) * ((sigma - <span class="built_in">sin</span>(sigma)) / (<span class="number">2</span> * pi)) + xs; <span class="comment">// 摆动相x坐标</span></span><br><span class="line">        xep_z = (xs - xf) * ((sigma - <span class="built_in">sin</span>(sigma)) / (<span class="number">2</span> * pi)) + xf; <span class="comment">// 支撑相x坐标</span></span><br><span class="line"></span><br><span class="line">         <span class="comment">// 输出x</span></span><br><span class="line">        x_1 = xep_b; </span><br><span class="line">        <span class="comment">// 输出y</span></span><br><span class="line">        y_1 = zep+height; <span class="comment">//+zep是在摆动相足端抬起后该时刻足端距离关节电机的距离</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">nijie</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//asin acos返回角度为弧度制</span></span><br><span class="line">    l = <span class="built_in">sqrt</span>(x_1 * x_1 + y_1 * y_1);</span><br><span class="line">    psi = <span class="built_in">asin</span>(x_1 / l);</span><br><span class="line">    phi = <span class="built_in">acos</span>((l * l + l_1 * l_1 - l_2 * l_2) / (<span class="number">2</span> * l * l_1));</span><br><span class="line">    thet_rad1 = phi - psi;</span><br><span class="line">    thet_rad2 = phi + psi;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> **argv)</span></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    wb_robot_init();</span><br><span class="line"></span><br><span class="line">    WbDeviceTag Motor1 = wb_robot_get_device(<span class="string">&quot;motor1&quot;</span>);</span><br><span class="line">    WbDeviceTag Motor2 = wb_robot_get_device(<span class="string">&quot;motor2&quot;</span>);</span><br><span class="line"></span><br><span class="line">    timestep=wb_robot_get_basic_time_step();</span><br><span class="line">    <span class="keyword">while</span> (wb_robot_step(timestep) != <span class="number">-1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        t = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (t &lt;= <span class="number">1</span>) </span><br><span class="line">        &#123;</span><br><span class="line">            trot();<span class="comment">//摆线足端轨迹规划 输出足端坐标</span></span><br><span class="line">            nijie();<span class="comment">//运动学逆解 输入足端坐标 输出电机转动角度</span></span><br><span class="line">            wb_motor_set_position(Motor1, <span class="number">1.57</span>-thet_rad1); <span class="comment">//控制关节电机1旋转 1.57是两大腿平行时motor1的初始位置 90°</span></span><br><span class="line">            wb_motor_set_position(Motor2, <span class="number">-1.57</span>+thet_rad2);<span class="comment">//控制关节电机2旋转 -1.57是两大腿平行时motor2的初始位置 -90°</span></span><br><span class="line">            wb_robot_step(<span class="number">15</span>);</span><br><span class="line">            t += speed;<span class="comment">//控制步频</span></span><br><span class="line">        &#125; </span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    wb_robot_cleanup();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="webots仿真步长"><a href="#webots仿真步长" class="headerlink" title="webots仿真步长"></a>webots仿真步长</h2><p>在 <strong>Webots</strong> 中，**<code>basicTimeStep</code>** 和 <strong><code>wb_robot_step(time_step)</code></strong> 中的 <strong><code>time_step</code></strong> 是两个密切相关的重要概念。它们共同决定了仿真的时间步长和运行方式。</p>
+<hr>
+<ol>
+<li><strong><code>basicTimeStep</code></strong> 的作用</li>
+</ol>
+<ul>
+<li><strong><code>basicTimeStep</code></strong> 是在 Webots 世界文件（<code>.wbt</code>）中定义的一个全局参数。</li>
+<li>它表示仿真的<strong>基本时间步长</strong>，单位为<strong>毫秒（ms）</strong>。</li>
+<li>这个参数决定了仿真引擎更新物理世界和传感器数据的频率。</li>
+<li>Webots 中的传感器（如摄像头、距离传感器、IMU 等）数据更新频率与 <code>basicTimeStep</code> 直接相关。</li>
+</ul>
+<p>示例：</p>
+<p>在 <code>.wbt</code> 文件中，你可能会看到如下定义：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">WorldInfo &#123;</span><br><span class="line">  basicTimeStep 16</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>这里的 <code>basicTimeStep</code> 设置为 <strong>16 毫秒</strong>，意味着仿真引擎每 <strong>16 毫秒</strong> 更新一次物理世界和传感器数据。</li>
+</ul>
+<hr>
+<ol start="2">
+<li><strong><code>wb_robot_step(time_step)</code></strong> 的作用</li>
+</ol>
+<ul>
+<li><strong><code>wb_robot_step(time_step)</code></strong> 是 Webots 控制器程序中的一个函数调用。</li>
+<li>它的作用是<strong>推进仿真时间</strong>，并更新仿真状态（例如传感器数据、物理引擎等）。</li>
+<li>参数 <strong><code>time_step</code></strong> 表示控制器希望仿真推进的时间步长，单位也是<strong>毫秒（ms）</strong>。</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wb_robot_step(32);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>这行代码会让仿真时间向前推进 <strong>32 毫秒</strong>。</li>
+</ul>
+<hr>
+<ol start="3">
+<li><strong><code>basicTimeStep</code> 和 <code>time_step</code> 的关系</strong></li>
+</ol>
+<ul>
+<li><strong><code>basicTimeStep</code></strong> 是仿真引擎的最小时间单位，而 <strong><code>time_step</code></strong> 是控制器调用 <code>wb_robot_step</code> 时指定的时间步长。</li>
+<li><strong><code>time_step</code></strong> 必须是 <strong><code>basicTimeStep</code></strong> 的整数倍。也就是说，<code>time_step = n * basicTimeStep</code>，其中 <code>n</code> 是一个正整数。<ul>
+<li>如果 <code>time_step</code> 不是 <code>basicTimeStep</code> 的整数倍，Webots 会自动将其调整为最接近的整数倍值。</li>
+</ul>
+</li>
+<li>每次调用 <code>wb_robot_step(time_step)</code>，仿真引擎会执行 <code>n</code> 次内部更新（每次更新 <code>basicTimeStep</code> 毫秒）。</li>
+</ul>
+<p>示例：</p>
+<ul>
+<li>如果 <code>basicTimeStep = 16</code>，而 <code>time_step = 32</code>：<ul>
+<li>Webots 会执行 <strong>2 次</strong>内部更新（因为 32&#x3D;2×1632&#x3D;2×16）。</li>
+</ul>
+</li>
+<li>如果 <code>basicTimeStep = 16</code>，而 <code>time_step = 50</code>：<ul>
+<li>Webots 会将 <code>time_step</code> 调整为 <strong>48</strong>（因为 48&#x3D;3×1648&#x3D;3×16），并执行 <strong>3 次</strong>内部更新。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ol start="4">
+<li><strong>为什么需要 <code>basicTimeStep</code> 和 <code>time_step</code> 的配合？</strong></li>
+</ol>
+<ul>
+<li><strong><code>basicTimeStep</code></strong> 决定了仿真的精度和性能：<ul>
+<li>较小的 <code>basicTimeStep</code> 会提高仿真精度，但会增加计算量，降低仿真速度。</li>
+<li>较大的 <code>basicTimeStep</code> 会加快仿真速度，但可能会降低仿真精度。</li>
+</ul>
+</li>
+<li><strong><code>time_step</code></strong> 决定了控制器的更新频率：<ul>
+<li>较小的 <code>time_step</code> 会让控制器更频繁地更新，适合需要高实时性的场景。</li>
+<li>较大的 <code>time_step</code> 会减少控制器的更新频率，适合计算量较大的控制器。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ol start="5">
+<li><strong>实际应用中的建议</strong></li>
+</ol>
+<ul>
+<li>在 Webots 中，通常会将 <code>time_step</code> 设置为与 <code>basicTimeStep</code> 相同的值，以确保仿真和控制器的同步。</li>
+<li>例如：<ul>
+<li>如果 <code>basicTimeStep = 16</code>，则通常设置 <code>time_step = 16</code>。</li>
+<li>这样可以确保每次调用 <code>wb_robot_step</code> 时，仿真引擎只执行一次内部更新。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p>总结</p>
+<ul>
+<li><strong><code>basicTimeStep</code></strong> 是仿真引擎的最小时间单位，定义在 <code>.wbt</code> 文件中。</li>
+<li><strong><code>time_step</code></strong> 是控制器调用 <code>wb_robot_step</code> 时指定的时间步长，必须是 <code>basicTimeStep</code> 的整数倍。</li>
+<li>两者共同决定了仿真的精度、性能和控制器更新频率。通常建议将 <code>time_step</code> 设置为与 <code>basicTimeStep</code> 相同的值。</li>
+</ul>
+<h2 id="步态规划"><a href="#步态规划" class="headerlink" title="步态规划"></a>步态规划</h2><p>​	步态就是描述动物走路特点的一种<strong>周期性</strong>现象。</p>
+<img src="/2025/02/15/%E5%B9%B6%E8%81%94%E5%9B%9B%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA/image-20250217193908989.png" alt="image-20250217193908989" style="zoom:50%;">
+
+<h3 id="占空比和相位"><a href="#占空比和相位" class="headerlink" title="占空比和相位"></a>占空比和相位</h3><p>​	占空比即每条腿在一个周期内支撑相和摆动相所占的比例，进而用来确定每个时刻，应该有几条腿着地，几条腿悬空；相位用来确定这四条腿运动的先后顺序，也就是时序，只有按照这个先后顺序，机械狗才能做出正确的步态，不然就会非常的混乱。</p>
+<h3 id="trot步态"><a href="#trot步态" class="headerlink" title="trot步态"></a>trot步态</h3><p>​	摆动相和支撑相各占一半时间，任意时刻下都有两条腿触地，并且这两条腿分布在机身的对角线方向。</p>
+<p>​                                   <img src="/2025/02/15/%E5%B9%B6%E8%81%94%E5%9B%9B%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA/image-20250217230254398.png" alt="image-20250217230254398" style="zoom:60%;"><img src="/2025/02/15/%E5%B9%B6%E8%81%94%E5%9B%9B%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA/image-20250217230308193.png" alt="image-20250217230308193" style="zoom:45%;"></p>
+<p>第一步 方程转化为代码</p>
+<p><img src="/2025/02/15/%E5%B9%B6%E8%81%94%E5%9B%9B%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA/image-20250217195253545.png" alt="image-20250217195253545"></p>
+<p><img src="/2025/02/15/%E5%B9%B6%E8%81%94%E5%9B%9B%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA/image-20250217195314021.png" alt="  "></p>
+<p>第二步 做出状态切换</p>
+<p><img src="/2025/02/15/%E5%B9%B6%E8%81%94%E5%9B%9B%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA/image-20250217200255318.png" alt="image-20250217200255318"></p>
+<p>第三步 向电机输出对应的两种步态状态</p>
+<p><img src="/2025/02/15/%E5%B9%B6%E8%81%94%E5%9B%9B%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA/image-20250217203356862.png" alt="image-20250217203356862"></p>
+<p>第四步 得到完整的TROT步态程序</p>
+<p><img src="/2025/02/15/%E5%B9%B6%E8%81%94%E5%9B%9B%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA/image-20250217204739449.png" alt="image-20250217204739449"></p>
+<p>webots仿真：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;webots/robot.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;webots/motor.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;webots/keyboard.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;webots/inertial_unit.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;gaitz.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;pid.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;hardware.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> TIME_STEP 32</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> pi 3.14</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> --</span></span><br><span class="line"><span class="comment"> 21</span></span><br><span class="line"><span class="comment"> 34</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> **argv)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;START&quot;</span>);</span><br><span class="line">    wb_robot_init();</span><br><span class="line">    <span class="comment">//Dog_Init();</span></span><br><span class="line">    hardwareInit();</span><br><span class="line">    pid_Init();</span><br><span class="line">    posInit();</span><br><span class="line">    <span class="keyword">while</span> (wb_robot_step(<span class="number">16</span>) != <span class="number">-1</span>)<span class="comment">//1</span></span><br><span class="line">    &#123;</span><br><span class="line">      t = <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">while</span> (t &lt;= <span class="number">1</span>)</span><br><span class="line">      &#123;</span><br><span class="line">        values=wb_inertial_unit_get_roll_pitch_yaw(imu);</span><br><span class="line">        trot();</span><br><span class="line">        nijie();</span><br><span class="line">        execute();</span><br><span class="line">        wb_robot_step(<span class="number">20</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;angle:%f Yaw:%f\r\n&quot;</span>,angle,values[<span class="number">2</span>]);</span><br><span class="line">        t += <span class="number">0.01</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    wb_robot_cleanup();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> GAITZ_H_</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> GAITZ_H_</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;webots/robot.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;hardware.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> pi 3.14</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> TIME_STEP 32</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> flag1=<span class="number">0</span>;</span><br><span class="line"><span class="type">int</span> T_s = <span class="number">1</span>;</span><br><span class="line"><span class="type">float</span> fai = <span class="number">0.5</span>;</span><br><span class="line"><span class="type">int</span> timestep;</span><br><span class="line"><span class="type">float</span> t = <span class="number">0.0</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">float</span> sigma = <span class="number">0.0</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">float</span> psi_rf = <span class="number">0.0</span>;</span><br><span class="line"><span class="type">float</span> phi_rf = <span class="number">0.0</span>;</span><br><span class="line"><span class="type">float</span> psi_lf = <span class="number">0.0</span>;</span><br><span class="line"><span class="type">float</span> phi_lf = <span class="number">0.0</span>;</span><br><span class="line"><span class="type">float</span> psi_rb = <span class="number">0.0</span>;</span><br><span class="line"><span class="type">float</span> phi_rb = <span class="number">0.0</span>;</span><br><span class="line"><span class="type">float</span> psi_lb = <span class="number">0.0</span>;</span><br><span class="line"><span class="type">float</span> phi_lb = <span class="number">0.0</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">float</span> thet_rad1_rf = <span class="number">0.0</span>;</span><br><span class="line"><span class="type">float</span> thet_rad2_rf = <span class="number">0.0</span>;</span><br><span class="line"><span class="type">float</span> thet_rad1_rb = <span class="number">0.0</span>;</span><br><span class="line"><span class="type">float</span> thet_rad2_rb = <span class="number">0.0</span>;</span><br><span class="line"><span class="type">float</span> thet_rad1_lf = <span class="number">0.0</span>;</span><br><span class="line"><span class="type">float</span> thet_rad2_lf = <span class="number">0.0</span>;</span><br><span class="line"><span class="type">float</span> thet_rad1_lb = <span class="number">0.0</span>;</span><br><span class="line"><span class="type">float</span> thet_rad2_lb = <span class="number">0.0</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">float</span> x_rf, x_lf, x_rb, x_lb; <span class="comment">// 最终坐标</span></span><br><span class="line"><span class="type">float</span> y_rf, y_lf, y_rb, y_lb;</span><br><span class="line"><span class="comment">//****************************</span></span><br><span class="line"><span class="type">float</span> height = <span class="number">-19</span>;<span class="comment">//22</span></span><br><span class="line"><span class="type">float</span> h =<span class="number">9</span>;<span class="comment">//11</span></span><br><span class="line"><span class="type">float</span> zep = <span class="number">0.0</span>;   <span class="comment">// 摆线顶部高度h</span></span><br><span class="line"><span class="type">float</span> xep_b = <span class="number">0.0</span>; <span class="comment">// 摆动相x坐标</span></span><br><span class="line"><span class="type">float</span> xep_z = <span class="number">0.0</span>; <span class="comment">// 支撑相x坐标</span></span><br><span class="line"></span><br><span class="line"><span class="type">float</span> l_rf = <span class="number">0.0</span>; <span class="comment">// 虚拟腿长</span></span><br><span class="line"><span class="type">float</span> l_lf = <span class="number">0.0</span>; <span class="comment">// 虚拟腿长</span></span><br><span class="line"><span class="type">float</span> l_rb = <span class="number">0.0</span>; <span class="comment">// 虚拟腿长</span></span><br><span class="line"><span class="type">float</span> l_lb = <span class="number">0.0</span>; <span class="comment">// 虚拟腿长</span></span><br><span class="line"></span><br><span class="line"><span class="type">float</span> l_1 = <span class="number">10.0</span>; <span class="comment">// 大腿长</span></span><br><span class="line"><span class="type">float</span> l_2 = <span class="number">20.0</span>; <span class="comment">// 小腿长</span></span><br><span class="line"></span><br><span class="line"><span class="type">float</span> xs = <span class="number">-10</span>;<span class="comment">//-6</span></span><br><span class="line"><span class="type">float</span> xf = <span class="number">10</span>;<span class="comment">//6</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*控制trot状态</span></span><br><span class="line"><span class="comment">前进 r1=1 r2=1 r3=1 r4=1</span></span><br><span class="line"><span class="comment">后退 r1=-1 r2=-1 r3=-1 r4=-1</span></span><br><span class="line"><span class="comment">逆时针转向 r1=1 r2=-1 r3=-1 r4=1</span></span><br><span class="line"><span class="comment">顺时针转向 r1=-1 r2=1 r3=1 r4=-1</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="type">int</span> r1=<span class="number">-1</span>;</span><br><span class="line"><span class="type">int</span> r2=<span class="number">1</span>;</span><br><span class="line"><span class="type">int</span> r3=<span class="number">1</span>;</span><br><span class="line"><span class="type">int</span> r4=<span class="number">-1</span>;</span><br><span class="line"><span class="comment">//****************************</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">trot</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (t &lt; T_s * fai)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//摆线足端轨迹规划</span></span><br><span class="line">        sigma = <span class="number">2</span> * pi * t / (fai * T_s);</span><br><span class="line">        zep = h * (<span class="number">1</span> - <span class="built_in">cos</span>(sigma)) / <span class="number">2</span>;                             <span class="comment">// y方向坐标</span></span><br><span class="line">        xep_b = (xf - xs) * ((sigma - <span class="built_in">sin</span>(sigma)) / (<span class="number">2</span> * pi)) + xs; <span class="comment">// 摆动相x坐标</span></span><br><span class="line">        xep_z = (xs - xf) * ((sigma - <span class="built_in">sin</span>(sigma)) / (<span class="number">2</span> * pi)) + xf; <span class="comment">// 支撑相x坐标</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 输出x</span></span><br><span class="line">        x_rf = xep_z*r1; </span><br><span class="line">        x_lf = xep_b*r2;</span><br><span class="line">        x_lb = xep_z*r3;</span><br><span class="line">        x_rb = xep_b*r4;</span><br><span class="line">        <span class="comment">// 输出y</span></span><br><span class="line">        y_rf = <span class="number">0</span> + height;</span><br><span class="line">        y_lf = zep + height;</span><br><span class="line">        y_lb = <span class="number">0</span> + height;</span><br><span class="line">        y_rb = zep + height;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> ((t &gt; T_s * fai) &amp;&amp; (t &lt;= T_s))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//摆线足端轨迹规划</span></span><br><span class="line">        sigma = <span class="number">2</span> * pi * (t - fai * T_s) / (fai * T_s);</span><br><span class="line">        zep = h * (<span class="number">1</span> - <span class="built_in">cos</span>(sigma)) / <span class="number">2</span>;</span><br><span class="line">        xep_b = (xf - xs) * ((sigma - <span class="built_in">sin</span>(sigma)) / (<span class="number">2</span> * pi)) + xs; <span class="comment">// 摆动相x坐标</span></span><br><span class="line">        xep_z = (xs - xf) * ((sigma - <span class="built_in">sin</span>(sigma)) / (<span class="number">2</span> * pi)) + xf; <span class="comment">// 支撑相x坐标</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 输出x</span></span><br><span class="line">        x_rf = xep_z*r1; </span><br><span class="line">        x_lf = xep_b*r2;</span><br><span class="line">        x_lb = xep_z*r3;</span><br><span class="line">        x_rb = xep_b*r4;</span><br><span class="line">        <span class="comment">// 输出y</span></span><br><span class="line">        y_rf = zep + height; <span class="comment">// 摆动</span></span><br><span class="line">        y_lf = <span class="number">0</span> + height;</span><br><span class="line">        y_lb = zep + height;</span><br><span class="line">        y_rb = <span class="number">0</span> + height;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="pace步态"><a href="#pace步态" class="headerlink" title="pace步态"></a>pace步态</h3><p>​                                        <img src="/2025/02/15/%E5%B9%B6%E8%81%94%E5%9B%9B%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA/image-20250217222552574.png" alt="image-20250217222552574" style="zoom:64%;"><img src="/2025/02/15/%E5%B9%B6%E8%81%94%E5%9B%9B%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA/image-20250217222801646.png" alt="image-20250217222801646"></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">pace</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (t &lt; T_s * fai)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//摆线足端轨迹规划</span></span><br><span class="line">        sigma = <span class="number">2</span> * pi * t / (fai * T_s);</span><br><span class="line">        zep = h * (<span class="number">1</span> - <span class="built_in">cos</span>(sigma)) / <span class="number">2</span>;                             <span class="comment">// y方向坐标</span></span><br><span class="line">        xep_b = (xf - xs) * ((sigma - <span class="built_in">sin</span>(sigma)) / (<span class="number">2</span> * pi)) + xs; <span class="comment">// 摆动相x坐标</span></span><br><span class="line">        xep_z = (xs - xf) * ((sigma - <span class="built_in">sin</span>(sigma)) / (<span class="number">2</span> * pi)) + xf; <span class="comment">// 支撑相x坐标</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 输出x</span></span><br><span class="line">        x_rf = xep_z; </span><br><span class="line">        x_lf = xep_b;</span><br><span class="line">        x_lb = xep_b;</span><br><span class="line">        x_rb = xep_z;</span><br><span class="line">        <span class="comment">// 输出y</span></span><br><span class="line">        y_rf = <span class="number">0</span> + height;</span><br><span class="line">        y_lf = zep + height;</span><br><span class="line">        y_lb = zep + height;</span><br><span class="line">        y_rb = <span class="number">0</span> + height;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> ((t &gt; T_s * fai) &amp;&amp; (t &lt;= T_s))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//摆线足端轨迹规划</span></span><br><span class="line">        sigma = <span class="number">2</span> * pi * (t - fai * T_s) / (fai * T_s);</span><br><span class="line">        zep = h * (<span class="number">1</span> - <span class="built_in">cos</span>(sigma)) / <span class="number">2</span>;</span><br><span class="line">        xep_b = (xf - xs) * ((sigma - <span class="built_in">sin</span>(sigma)) / (<span class="number">2</span> * pi)) + xs; <span class="comment">// 摆动相x坐标</span></span><br><span class="line">        xep_z = (xs - xf) * ((sigma - <span class="built_in">sin</span>(sigma)) / (<span class="number">2</span> * pi)) + xf; <span class="comment">// 支撑相x坐标</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 输出x</span></span><br><span class="line">        x_rf = xep_b;</span><br><span class="line">        x_lf = xep_z;</span><br><span class="line">        x_lb = xep_z;</span><br><span class="line">        x_rb = xep_b;</span><br><span class="line">        <span class="comment">// 输出y</span></span><br><span class="line">        y_rf = zep + height; </span><br><span class="line">        y_lf = <span class="number">0</span> + height;</span><br><span class="line">        y_lb = <span class="number">0</span> + height;</span><br><span class="line">        y_rb = zep + height;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="walk步态"><a href="#walk步态" class="headerlink" title="walk步态"></a>walk步态</h3><p>​	Walk步态是一种静态步态，即在运动过程中始终有三条腿处于支撑相，至多只有一条腿处于摆动相</p>
+<img src="/2025/02/15/%E5%B9%B6%E8%81%94%E5%9B%9B%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA/image-20250218160542915.png" alt="image-20250218160542915" style="zoom:67%;">
+
+<p>待开发,涉及到相位偏差,后面等把webots程序改成FSM模式后再补……可以先看程序框架里的部分内容有举例。</p>
+<h3 id="转向步态"><a href="#转向步态" class="headerlink" title="转向步态"></a>转向步态</h3><p>​	利用<strong>差速</strong>原理，本质还是trot步态，即一对对角腿在支撑相时另一对对角腿在摆动相，只不过腿运动方向相反。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*控制trot状态</span></span><br><span class="line"><span class="comment">前进 r1=1 r2=1 r3=1 r4=1</span></span><br><span class="line"><span class="comment">后退 r1=-1 r2=-1 r3=-1 r4=-1</span></span><br><span class="line"><span class="comment">逆时针转向 r1=1 r2=-1 r3=-1 r4=1</span></span><br><span class="line"><span class="comment">顺时针转向 r1=-1 r2=1 r3=1 r4=-1</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">x_rf = xep_z*r1; </span><br><span class="line">x_lf = xep_b*r2;</span><br><span class="line">x_lb = xep_z*r3;</span><br><span class="line">x_rb = xep_b*r4;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="程序框架"><a href="#程序框架" class="headerlink" title="程序框架"></a>程序框架</h2><p>参考MIT_CHEETAH开源框架，使用FSM状态机。</p>
+<p>首先是main.c文件，while循环只在干一件事情，就是循环执行Dog_Run函数</p>
+<p><img src="/2025/02/15/%E5%B9%B6%E8%81%94%E5%9B%9B%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA/image-20250218105920338.png" alt="image-20250218105920338"></p>
+<p>Dog_Run函数如下所示</p>
+<p><img src="/2025/02/15/%E5%B9%B6%E8%81%94%E5%9B%9B%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA/image-20250218105942567.png" alt="image-20250218105942567"></p>
+<p>以下所有程序在Dog_Run函数中循环运行</p>
+<p>进入FSM_Run后，切换步态，以trot步态为例，首先进入enter函数，通过Dog_SetPeriod函数设置周期(dog.period)和支撑相摆动相在周期所占的比例(dog.stRatio,dog.swRatio)，设置global.isWalking为1表示机器人正在行走，开始进行步态规划，计算摆线足端轨迹。</p>
+<p>global.bias代表各个腿运动的时序关系</p>
+<p><img src="/2025/02/15/%E5%B9%B6%E8%81%94%E5%9B%9B%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA/image-20250218110020203.png" alt="image-20250218110020203"></p>
+<p><img src="/2025/02/15/%E5%B9%B6%E8%81%94%E5%9B%9B%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA/image-20250218110234356.png" alt="image-20250218110234356"></p>
+<p>首先进行相位计算，用for循环依次计算每条腿的相位，如果normalT&lt;dog.stRatio,说明在支撑相，global.contact[i]&#x3D;1,反之在摆动相</p>
+<p><img src="/2025/02/15/%E5%B9%B6%E8%81%94%E5%9B%9B%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA/image-20250218110059359.png" alt="image-20250218110059359"></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//确保结果始终在 [0, dog.period) 范围内，即使 global.runTime 很大。</span></span><br><span class="line"><span class="comment">////normalT 是归一化的时间，表示当前时间在步态周期中的位置</span></span><br><span class="line"><span class="type">float</span> normalT = <span class="built_in">fmod</span>(global.runTime + dog.period * global.bias[i], dog.period) / dog.period;</span><br><span class="line">以walk步态为例:</span><br><span class="line">global.runtime=<span class="number">0</span> </span><br><span class="line">第一条腿：normalT=(<span class="number">0</span>+<span class="number">0.0</span>)%<span class="number">1</span>/<span class="number">1</span>=<span class="number">0</span>      下一时刻<span class="number">0.01</span>&lt;dog.stRatio     支撑相 相位 <span class="number">0.01</span>/dog.stRatio</span><br><span class="line">第二条腿：normalT=(<span class="number">0</span>+<span class="number">0.25</span>)%<span class="number">1</span>/<span class="number">1</span>=<span class="number">0.25</span>  下一时刻<span class="number">0.26</span>&lt;dog.stRatio     支撑相 相位 <span class="number">0.26</span>/dog.stRatio</span><br><span class="line">第三条腿：normalT=(<span class="number">0</span>+<span class="number">0.50</span>)%<span class="number">1</span>/<span class="number">1</span>=<span class="number">0.5</span>   下一时刻<span class="number">0.51</span>&lt;dog.stRatio     支撑相 相位 <span class="number">0.51</span>/dog.stRatio</span><br><span class="line">第四条腿：normalT=(<span class="number">0</span>+<span class="number">0.75</span>)%<span class="number">1</span>/<span class="number">1</span>=<span class="number">0.75</span>  下一时刻<span class="number">0.76</span>&gt;dog.stRatio     摆动相 相位 (<span class="number">0.76</span>-dog.stRatio)/dog.swRatio</span><br><span class="line"></span><br><span class="line"><span class="comment">//x和y是要计算模的两个浮点数，函数返回值为x除以y的余数（double）。</span></span><br><span class="line"><span class="type">double</span> <span class="built_in">fmod</span>(<span class="type">double</span> x, <span class="type">double</span> y);</span><br></pre></td></tr></table></figure>
+
+<img src="/2025/02/15/%E5%B9%B6%E8%81%94%E5%9B%9B%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA/image-20250218194553507.png" alt="image-20250218194553507" style="zoom:50%;">
+
+
+
+<p>根据当前相位计算摆线轨迹，p即前面我们方程里的sigma</p>
+<p>sigma &#x3D; 2 * pi * t &#x2F; (fai * T_s);</p>
+<p>sigma &#x3D; 2 * pi * (t - fai * T_s) &#x2F; (fai * T_s);</p>
+<p><img src="/2025/02/15/%E5%B9%B6%E8%81%94%E5%9B%9B%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA/image-20250218110133037.png" alt="image-20250218110133037"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://zzx686a.github.io">Zhixiong Zhang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://zzx686a.github.io/2025/02/15/%E5%B9%B6%E8%81%94%E5%9B%9B%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA/">http://zzx686a.github.io/2025/02/15/%E5%B9%B6%E8%81%94%E5%9B%9B%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://zzx686a.github.io" target="_blank">Zhixiong's island</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%9B%9B%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA/">四足机器人</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>赞助</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/images/wechat.jpg" target="_blank"><img class="post-qr-code-img" src="/images/wechat.jpg" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/images/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/images/alipay.jpg" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2025/01/24/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6/" title="电机控制"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">电机控制</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div class="comment-switch"><span class="first-comment">Valine</span><span id="switch-btn"></span><span class="second-comment">Disqus</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div><div><div id="disqus_thread"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/./images/head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Zhixiong Zhang</div><div class="author-info__description">Fortune favors the bold</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://space.bilibili.com/633279373?spm_id_from=333.1007.0.0"><i class="fa-brands fa-bilibili"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://tool.gljlw.com/qq/?qq=3457109829" target="_blank" title="QQ"><i class="fa-brands fa-qq" style="color: #4a7dbe;"></i></a><a class="social-icon" href="https://mbd.pub/o/author-bmyalmln" target="_blank" title="store"><i class="fa-solid fa-store" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">wechat zzxshangan2024</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B9%B6%E8%81%94%E5%9B%9B%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA%E4%BD%8D%E7%BD%AE%E6%8E%A7%E5%88%B6"><span class="toc-number">1.</span> <span class="toc-text">并联四足机器人位置控制</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%91%86%E7%BA%BF%E8%B6%B3%E7%AB%AF%E8%BD%A8%E8%BF%B9%E5%92%8C%E8%BF%90%E5%8A%A8%E5%AD%A6%E9%80%86%E8%A7%A3"><span class="toc-number">1.1.</span> <span class="toc-text">摆线足端轨迹和运动学逆解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8Matlab%E7%94%BB%E5%87%BA%E6%91%86%E7%BA%BF%E6%AD%A5%E6%80%81%E6%9B%B2%E7%BA%BF"><span class="toc-number">1.1.1.</span> <span class="toc-text">用Matlab画出摆线步态曲线</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%91%86%E7%BA%BF%E6%96%B9%E7%A8%8B"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">摆线方程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E5%8A%A8%E5%AD%A6%E9%80%86%E8%A7%A3"><span class="toc-number">1.1.2.</span> <span class="toc-text">运动学逆解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E8%85%BF%E6%91%86%E7%BA%BF%E8%B6%B3%E7%AB%AF%E8%BD%A8%E8%BF%B9%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.1.3.</span> <span class="toc-text">单腿摆线足端轨迹代码实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#webots%E4%BB%BF%E7%9C%9F%E6%AD%A5%E9%95%BF"><span class="toc-number">1.2.</span> <span class="toc-text">webots仿真步长</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A5%E6%80%81%E8%A7%84%E5%88%92"><span class="toc-number">1.3.</span> <span class="toc-text">步态规划</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%A0%E7%A9%BA%E6%AF%94%E5%92%8C%E7%9B%B8%E4%BD%8D"><span class="toc-number">1.3.1.</span> <span class="toc-text">占空比和相位</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#trot%E6%AD%A5%E6%80%81"><span class="toc-number">1.3.2.</span> <span class="toc-text">trot步态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pace%E6%AD%A5%E6%80%81"><span class="toc-number">1.3.3.</span> <span class="toc-text">pace步态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#walk%E6%AD%A5%E6%80%81"><span class="toc-number">1.3.4.</span> <span class="toc-text">walk步态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%AC%E5%90%91%E6%AD%A5%E6%80%81"><span class="toc-number">1.3.5.</span> <span class="toc-text">转向步态</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E6%A1%86%E6%9E%B6"><span class="toc-number">1.4.</span> <span class="toc-text">程序框架</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/02/15/%E5%B9%B6%E8%81%94%E5%9B%9B%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA/" title="并联四足机器人"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="并联四足机器人"/></a><div class="content"><a class="title" href="/2025/02/15/%E5%B9%B6%E8%81%94%E5%9B%9B%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA/" title="并联四足机器人">并联四足机器人</a><time datetime="2025-02-15T13:33:48.000Z" title="发表于 2025-02-15 21:33:48">2025-02-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/01/24/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6/" title="电机控制"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="电机控制"/></a><div class="content"><a class="title" href="/2025/01/24/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6/" title="电机控制">电机控制</a><time datetime="2025-01-23T16:23:25.000Z" title="发表于 2025-01-24 00:23:25">2025-01-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/01/18/PCB%E8%AE%BE%E8%AE%A1-51/" title="PCB设计_51"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="PCB设计_51"/></a><div class="content"><a class="title" href="/2025/01/18/PCB%E8%AE%BE%E8%AE%A1-51/" title="PCB设计_51">PCB设计_51</a><time datetime="2025-01-18T15:08:42.000Z" title="发表于 2025-01-18 23:08:42">2025-01-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/01/14/KEIL%E4%BD%BF%E7%94%A8/" title="51单片机学习笔记"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="51单片机学习笔记"/></a><div class="content"><a class="title" href="/2025/01/14/KEIL%E4%BD%BF%E7%94%A8/" title="51单片机学习笔记">51单片机学习笔记</a><time datetime="2025-01-14T15:13:43.099Z" title="发表于 2025-01-14 23:13:43">2025-01-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/19/Webots-python/" title="Webots&amp;python"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Webots&amp;python"/></a><div class="content"><a class="title" href="/2024/02/19/Webots-python/" title="Webots&amp;python">Webots&amp;python</a><time datetime="2024-02-19T14:38:45.000Z" title="发表于 2024-02-19 22:38:45">2024-02-19</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By Zhixiong Zhang</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.12.0"></script><script src="/js/main.js?v=4.12.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>(() => {
+  const initValine = () => {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'ereDBpr82BMDhIAqKQA37n4j-gzGzoHsz',
+      appKey: 'eyRRFW9XAfz5jAjj7liOHcFH',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: true
+    }, null))
+  }
+
+  const loadValine = async () => {
+    if (typeof Valine === 'function') initValine()
+    else {
+      await getScript('https://cdn.jsdelivr.net/npm/valine@1.5.1/dist/Valine.min.js')
+      initValine()
+    }
+  }
+
+  if ('Valine' === 'Valine' || !true) {
+    if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+    else setTimeout(loadValine, 0)
+  } else {
+    window.loadOtherComment = loadValine
+  }
+})()</script><script>(() => {
+  const disqus_config = function () {
+    this.page.url = 'http://zzx686a.github.io/2025/02/15/%E5%B9%B6%E8%81%94%E5%9B%9B%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA/'
+    this.page.identifier = '/2025/02/15/%E5%B9%B6%E8%81%94%E5%9B%9B%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA/'
+    this.page.title = '并联四足机器人'
+  }
+
+  const disqusReset = () => {
+    window.DISQUS && window.DISQUS.reset({
+      reload: true,
+      config: disqus_config
+    })
+  }
+
+  btf.addGlobalFn('themeChange', disqusReset, 'disqus')
+
+  const loadDisqus = () =>{
+    if (window.DISQUS) disqusReset()
+    else {
+      const script = document.createElement('script')
+      script.src = 'https://.disqus.com/embed.js'
+      script.setAttribute('data-timestamp', +new Date())
+      document.head.appendChild(script)
+    }
+  }
+
+  const getCount = async() => {
+    try {
+      const eleGroup = document.querySelector('#post-meta .disqus-comment-count')
+      if (!eleGroup) return
+      const cleanedLinks = eleGroup.href.replace(/#post-comment$/, '')
+
+      const res = await fetch(`https://disqus.com/api/3.0/threads/set.json?forum=&api_key=&thread:link=${cleanedLinks}`,{
+        method: 'GET'
+      })
+      const result = await res.json()
+
+      const count = result.response.length ? result.response[0].posts : 0
+      eleGroup.textContent = count
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+  if ('Valine' === 'Disqus' || !true) {
+    if (true) btf.loadComment(document.getElementById('disqus_thread'), loadDisqus)
+    else {
+      loadDisqus()
+      GLOBAL_CONFIG_SITE.isPost && getCount()
+    }
+  } else {
+    window.loadOtherComment = loadDisqus
+  }
+})()</script></div><div class="aplayer no-destroy" data-id="7351616036" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay="true"> </div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-fluttering-ribbon.min.js"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/click-heart.min.js" async="async" mobile="false"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener
+  btf.removeGlobalFnEvent('pjax')
+  btf.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
